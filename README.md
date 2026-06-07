@@ -21,6 +21,15 @@ Manage students, subjects, GPA and academic ranking — all from your terminal.
 - OOP (Student & Manager classes)
 
 ## 🚀 How to Run
-git clone https://github.com/Tun140113/Personal-Coding-Project
+git clone https://github.com/Tun140113/Personal-Coding-Project](https://github.com/Hello-ItsTuaan/Student-Manager.git
 cd Student_Manager\ Project
 python main.py
+
+## ⚠️ Important!
+This project is still in active development by [@Hello-ItsTuaan](https://github.com/Hello-ItsTuaan).
+You may encounter bugs or unexpected errors during use.
+
+If you run into any issues, please report them here:
+👉 [Create an Issue](https://github.com/Hello-ItsTuaan/Student-Manager/issues)
+
+— Thanks for your support! ❤️
