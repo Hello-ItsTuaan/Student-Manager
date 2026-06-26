@@ -10,8 +10,7 @@ Manage students, subjects, GPA and academic ranking — all from your terminal.
 - Academic ranking (Xuất Sắc / Giỏi / Khá / Trung Bình / Yếu)
 
 ## 🚧 Incoming
-- Subject & Grade Management (pick from 20-30 popular Vietnamese subjects)
-- Colorama colored terminal output
+- Colorama colored terminal output (in Dev)
 - Edit student info
 - Export to .txt / .csv
 

@@ -63,11 +63,7 @@ def chon_mon():
             print(f"  [{so}] {ten}")
 
         lua_chon = input(f"Chọn môn học {Fore.GREEN}(VD: 1 3 5) {Fore.WHITE} or {Fore.GREEN} (VD: 1, 2, 3) : ")
-        if "," in lua_chon:
-            tong_mon_hoc = lua_chon.replace(",", " ")
-            lua_chon = lua_chon.split()
-        else:
-            lua_chon = lua_chon.split()
+        tong_mon_hoc = lua_chon.replace(",", " ").split()
         
         ketqua = []
         for mon_hoc in tong_mon_hoc:
