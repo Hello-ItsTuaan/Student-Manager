@@ -16,7 +16,8 @@ while True:
   2. 🗑️  Xóa học sinh
   3. 🔍 Tìm học sinh
   4. 📋 Xem tất cả
-  5. 🚪 Thoát
+  5. 💯 Nhập điểm 
+  6. 🚪 Thoát
 ==================================""")
     lua_chon = input(">>> ").strip()
 
@@ -31,8 +32,11 @@ while True:
         
     elif lua_chon == "4":
         manager.hien_thi_tat_ca()
-        
+    
     elif lua_chon == "5":
+        manager.nhap_diem()
+
+    elif lua_chon == "6":
         print("👋 Tạm biệt!")
         break
     else:

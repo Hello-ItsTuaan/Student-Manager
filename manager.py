@@ -1,9 +1,11 @@
 from student import Student
-import json
 from discord_notifier import gui_discord
+from constants import chon_mon
+import json
 import os
 import shutil
 from prettytable import PrettyTable
+from colorama import Style, Fore, init
 from datetime import datetime
 width = shutil.get_terminal_size().columns
 
@@ -145,3 +147,24 @@ class Manager:
                 ])
             print(table)
             input()
+    def nhap_diem(self, hoc_sinh):
+        ds_mon = chon_mon()
+
+        if ds_mon is None:
+            return
+        try:
+            for ten_mon in ds_mon:
+                while True:
+                    diem = float(input(f"Nhập ĐIỂM cho môn {ten_mon}: "))
+                    if diem > 10:
+                        print(Fore.YELLOW + "Điểm của bạn không thể lớn hơn 10!")
+                        
+                    elif diem <0:
+                        print(Fore.YELLOW + "Điểm của bạn không thể nhỏ hơn 0!")
+                        
+                    else: 
+                        hoc_sinh.them_mon(ten_mon, diem)
+                        break
+        except ValueError:
+            print(Fore.RED + "Điểm phải là só! Không phải chữ cái")
+                                    
