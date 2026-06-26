@@ -17,6 +17,7 @@ def lay_webhook_url():
     
     if len(discord_webhook["discord_webhook_url"]) == 0:
         print("Cannot find Discord Webhook url, did you put it in?".center(width))
+        
         while True:
             print("=====".center(width))
             print("Do you want to add your Discord webhook to our system now? yes/no".center(width))
@@ -24,6 +25,7 @@ def lay_webhook_url():
             put = str(put)
             if put.lower() == "yes":
                 discord_webhook["discord_webhook_url"] = input("Please enter your Discord Webhook: ")
+                
                 try:
                     with open("config.json", "w") as file: 
                         json.dump(discord_webhook, file, indent=4)
@@ -31,9 +33,9 @@ def lay_webhook_url():
                         
                 except FileNotFoundError:
                     print("There is something ain't right!")
+            
             elif put.lower() == "no": 
-                print("Cannot send message to your Discord Server, but your data have been saved on your computer.".center(width))
-                break
+                return None
 
             else:
                 continue
@@ -45,6 +47,7 @@ def gui_discord(message):
     webhook_data = lay_webhook_url()
     if webhook_data is None:
         print(Fore.YELLOW + "WARNING: Because you didn't enter your Discord Webhook, we cannot send your message to Discord.")
+        return
 
 
     url = webhook_data["discord_webhook_url"]

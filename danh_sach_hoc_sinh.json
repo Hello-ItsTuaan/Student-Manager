@@ -1,1 +1,42 @@
-[]
+[
+    {
+        "id": "f362ca4e-ec6f-4582-862b-e32f8569002d",
+        "ten": "Nguyễn Bá Minh Tuấn",
+        "lop": "none",
+        "giao_vien": "none",
+        "sdt_phu_huynh": "none",
+        "mon_hoc": [],
+        "gpa": null,
+        "xep_loai": "Chua co mon hoc"
+    },
+    {
+        "id": "1965ae64-71ef-4269-9a4a-7cc385b83798",
+        "ten": "abc",
+        "lop": "abc",
+        "giao_vien": "abc",
+        "sdt_phu_huynh": "abc",
+        "mon_hoc": [],
+        "gpa": null,
+        "xep_loai": "Chua co mon hoc"
+    },
+    {
+        "id": "dfe21a18-2381-478c-8d3c-9eca0a24b922",
+        "ten": "abc",
+        "lop": "abc",
+        "giao_vien": "abc",
+        "sdt_phu_huynh": "abc",
+        "mon_hoc": [],
+        "gpa": null,
+        "xep_loai": "Chua co mon hoc"
+    },
+    {
+        "id": "d5b0e164-a924-430b-bd7d-13e5386230b2",
+        "ten": "ạndwd",
+        "lop": "ădaw",
+        "giao_vien": "dưa",
+        "sdt_phu_huynh": "dă",
+        "mon_hoc": [],
+        "gpa": null,
+        "xep_loai": "Chua co mon hoc"
+    }
+]
