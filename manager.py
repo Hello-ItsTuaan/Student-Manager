@@ -147,24 +147,55 @@ class Manager:
                 ])
             print(table)
             input()
-    def nhap_diem(self, hoc_sinh):
-        ds_mon = chon_mon()
+    def nhap_diem(self):
+        if not self.danhsach:
+            print("There is no student added!")
+            input()
+            clear()
+            add =input(Fore.BLUE + "Do you want to add a student now? y/n")
+            if add.lower() == "y":
+                self.them_hoc_sinh()
+            if add.lower() == "n":
+                return
+        
+        elif self.danhsach:
+            for hoc_sinh in self.danhsach:
+                print(f"ID: {hoc_sinh.id} | Tên: {hoc_sinh.name}")
 
-        if ds_mon is None:
-            return
-        try:
-            for ten_mon in ds_mon:
-                while True:
-                    diem = float(input(f"Nhập ĐIỂM cho môn {ten_mon}: "))
-                    if diem > 10:
-                        print(Fore.YELLOW + "Điểm của bạn không thể lớn hơn 10!")
-                        
-                    elif diem <0:
-                        print(Fore.YELLOW + "Điểm của bạn không thể nhỏ hơn 0!")
-                        
-                    else: 
-                        hoc_sinh.them_mon(ten_mon, diem)
-                        break
-        except ValueError:
-            print(Fore.RED + "Điểm phải là só! Không phải chữ cái")
-                                    
+            id_can_tim = input("Nhập ID học sinh: ")
+
+            for hoc_sinh in self.danhsach:
+                if hoc_sinh.id == id_can_tim:
+
+                    ds_mon = chon_mon()
+
+                    if ds_mon is None:
+                        return
+
+                    try:
+                        for ten_mon in ds_mon:
+                            while True:
+                                diem = float(input(f"Nhập điểm môn {ten_mon}: "))
+
+                                if diem > 10:
+                                    print("Điểm không thể lớn hơn 10")
+
+                                elif diem < 0:
+                                    print("Điểm không thể nhỏ hơn 0")
+
+                                else:
+                                    hoc_sinh.them_mon(ten_mon, diem)
+                                    break
+
+                        self.luu_json()
+                        print("✅ Đã cập nhật điểm!")
+
+                    except ValueError:
+                        print("❌ Điểm phải là số!")
+
+                    input()
+                    return
+
+            print("❌ Không tìm thấy học sinh")
+            input()
+                                        

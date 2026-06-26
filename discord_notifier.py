@@ -9,6 +9,7 @@ def lay_webhook_url():
     try:
         with open("config.json", "r") as file:
             discord_webhook = json.load(file)
+    
     except FileNotFoundError:
         discord_webhook = {"discord_webhook_url": ""}
         print("File not found, Webhook has been set to None")
