@@ -1,6 +1,7 @@
 from student import Student
 from discord_notifier import gui_discord
 from constants import chon_mon
+from csv_export import xuat_csv
 import json
 import os
 import shutil
@@ -43,8 +44,12 @@ class Manager:
                     hoc_sinh.mon_hoc = hs["mon_hoc"] 
                     self.danhsach.append(hoc_sinh)
         except FileNotFoundError:
+            print(Fore.RED + "ERROR: File not found!")
+            input()
             pass
         except json.decoder.JSONDecodeError:
+            print(Fore.RED + "ERROR: json.decoder.JSONDecodeError")
+            input()
             pass
 
 
@@ -198,4 +203,5 @@ class Manager:
 
             print("❌ Không tìm thấy học sinh")
             input()
-                                        
+    def xuat_bang_diem_csv(self):
+        xuat_csv(self.danhsach)

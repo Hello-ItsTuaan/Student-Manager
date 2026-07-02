@@ -1,4 +1,6 @@
 import uuid
+from colorama import Fore, init, Style
+init(autoreset=True)
 import os
 def clear():
     # Xóa màn hình terminal — "cls" cho Windows, "clear" cho Mac/Linux
@@ -62,10 +64,16 @@ class Student:
 ----------------------------------
 """)
         for mon in self.mon_hoc:
-            print(f"    {mon['ten']:<12}: {mon['diem']}")
+            if mon["diem"] >=9:
+                print(f"    {mon['ten']:<12}: {Fore.GREEN}{mon['diem']}")
+            elif mon["diem"] <9:
+                print(f"    {mon['ten']:<12}: {Fore.BLUE}{mon['diem']}")
+            elif mon["diem"] <8 :
+                print(f"    {mon['ten']:<12}: {Fore.YELLOW}{mon['diem']}")
+            elif mon["diem"] <5 :
+                print(f"    {mon['ten']:<12}: {Fore.RED}{mon['diem']}")
         print(f"""
 ----------------------------------
 📊 GPA     : {gpa_str}
 🏆 Xếp loại: {self.xep_loai()}
 ==================================""")
-        input()
