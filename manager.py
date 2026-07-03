@@ -2,6 +2,7 @@ from student import Student
 from discord_notifier import gui_discord
 from constants import chon_mon
 from csv_export import xuat_csv
+from edit_hoc_sinh import edit_hs
 import json
 import os
 import shutil
@@ -143,6 +144,7 @@ class Manager:
                     gpa_str = "Chưa có"
                 else:
                     gpa_str = round(gpa, 2)
+               
                 table.add_row([
                     hoc_sinh.id[:8],
                     hoc_sinh.name,
@@ -205,3 +207,6 @@ class Manager:
             input()
     def xuat_bang_diem_csv(self):
         xuat_csv(self.danhsach)
+    def edit_hoc_sinh(self):
+        edit_hs(self)
+    

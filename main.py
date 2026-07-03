@@ -15,14 +15,15 @@ while True:
 ==================================
       📚 STUDENT MANAGER 📚
 ==================================
-  {Fore.BLUE}1. ➕ Thêm học sinh
-  {Fore.RED}2. 🗑️ Xóa học sinh
-  {Fore.WHITE}3. 🔍 Tìm học sinh
-  {Fore.YELLOW}4. 📋 Xem tất cả
-  {Fore.CYAN}5. 💯 Nhập điểm 
-  {Fore.GREEN}6. 📊 Xuất File .CSV (Microsoft Excel)
-  {Fore.RED}7. 🚪 Thoát
-{Fore.WHITE}==================================""")
+    1. ➕ Thêm học sinh
+    2. 🗑️ Xóa học sinh
+    3. Sửa Thông Tin HỌC SINH
+    4. 🔍 Tìm học sinh
+    5. 📋 Xem tất cả
+    6. 💯 Nhập điểm 
+    7. 📊 Xuất File .CSV (Microsoft Excel)
+    8. 🚪 Thoát
+==================================""")
     lua_chon = input(">>> ").strip()
 
     if lua_chon == "1":
@@ -30,18 +31,20 @@ while True:
         
     elif lua_chon == "2":
         manager.xoa_hoc_sinh()
-        
     elif lua_chon == "3":
+        manager.edit_hoc_sinh()
+
+    elif lua_chon == "4":
         manager.tim_hoc_sinh()
         
-    elif lua_chon == "4":
+    elif lua_chon == "5":
         manager.hien_thi_tat_ca()
     
     elif lua_chon == "5":
         manager.nhap_diem()
-    elif lua_chon == "6":
-        manager.xuat_bang_diem_csv()
     elif lua_chon == "7":
+        manager.xuat_bang_diem_csv()
+    elif lua_chon == "8":
         print("👋 Tạm biệt!")
         break
     else:
