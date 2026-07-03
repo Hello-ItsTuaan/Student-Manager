@@ -1,7 +1,17 @@
 from manager import Manager
 import os
 from colorama import Fore, init, Style
+import sys
+
 init(autoreset=True)
+
+def resize_terminal(cols, rows):
+    # \x1b[8;ROWS;COLSxt is the standard ANSI escape sequence for resizing
+    sys.stdout.write(f"\x1b[8;{rows};{cols}t")
+    sys.stdout.flush()
+
+# Example: Set terminal to 120 columns wide and 40 rows high
+resize_terminal(150, 30)
 
 def clear():
     # Xóa màn hình terminal — "cls" cho Windows, "clear" cho Mac/Linux
@@ -16,8 +26,8 @@ while True:
       📚 STUDENT MANAGER 📚
 ==================================
     1. ➕ Thêm học sinh
-    2. 🗑️ Xóa học sinh
-    3. Sửa Thông Tin HỌC SINH
+    2. 🗑️  Xóa học sinh
+    3. ✏️  Sửa Thông Tin HỌC SINH
     4. 🔍 Tìm học sinh
     5. 📋 Xem tất cả
     6. 💯 Nhập điểm 
