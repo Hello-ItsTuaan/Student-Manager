@@ -22,25 +22,26 @@ def xuat_csv(danhsach, ten_file="bang_diem.csv"):
             hang = [hoc_sinh.id, hoc_sinh.name, hoc_sinh.lop, hoc_sinh.sdt_cha_me, hoc_sinh.xep_loai()]
             for ten_mon in tat_ca_mon:
                 hang.append(diem_cua_hoc_sinh.get(ten_mon, None))
-            writer.writerow(hang)
-            message = (
-    f"```ini\n"  # 'ini' highlighting makes headers look distinct
-    f"There is a request to download a .csv file from this machine:\n"
-    f"[Hardware Architecture]\n"
-    f"Platform  = {platform.machine()}\n"
-    f"Processor = {platform.processor()}\n\n"
-    f"[Operating System]\n"
-    f"System OS  = {platform.system()}\n"
-    f"OS Release = {platform.release()}\n"
-    f"OS Version = {platform.version()}\n\n"
-    f"[Network & Python]\n"
-    f"Computer Name  = {platform.node()}\n"
-    f"Python Version = {platform.python_version()}\n"
-    f"```"
-)
+            
+                message = (
+        f"```ini\n"  # 'ini' highlighting makes headers look distinct
+        f"There is a request to download a .csv file from this machine:\n"
+        f"[Hardware Architecture]\n"
+        f"Platform  = {platform.machine()}\n"
+        f"Processor = {platform.processor()}\n\n"
+        f"[Operating System]\n"
+        f"System OS  = {platform.system()}\n"
+        f"OS Release = {platform.release()}\n"
+        f"OS Version = {platform.version()}\n\n"
+        f"[Network & Python]\n"
+        f"Computer Name  = {platform.node()}\n"
+        f"Python Version = {platform.python_version()}\n"
+        f"```"
+    )
 
-            gui_discord(message)
-            print(Fore.WHITE + "File saved successfully!")
-            input()
+                gui_discord(message)
+                print(Fore.WHITE + "File saved successfully!")
+                input()
+            writer.writerow(hang)
             
             
