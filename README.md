@@ -11,9 +11,8 @@ Manage students, subjects, GPA and academic ranking — all from your terminal.
 
 ## 🚧 Incoming
 - Colorama colored terminal output (in Dev)
-- Edit student info
-- Export to .txt / .csv
-
+- Export to .txt
+  
 ## 🛠️ Built With
 - Python 3.x
 - JSON (data storage)
