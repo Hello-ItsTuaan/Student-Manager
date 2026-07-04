@@ -26,13 +26,14 @@ while True:
       📚 STUDENT MANAGER 📚
 ==================================
     1. ➕ Thêm học sinh
-    2. 🗑️  Xóa học sinh
-    3. ✏️  Sửa Thông Tin HỌC SINH
+    2. 🗑️ Xóa học sinh
+    3. ✏️ Sửa Thông Tin HỌC SINH
     4. 🔍 Tìm học sinh
     5. 📋 Xem tất cả
     6. 💯 Nhập điểm 
     7. 📊 Xuất File .CSV (Microsoft Excel)
-    8. 🚪 Thoát
+    8. 🪟 AI Analyzer (Require Openrouter API KEY!)
+    9. 🚪 Thoát
 ==================================""")
     lua_chon = input(">>> ").strip()
 
@@ -50,11 +51,13 @@ while True:
     elif lua_chon == "5":
         manager.hien_thi_tat_ca()
     
-    elif lua_chon == "5":
+    elif lua_chon == "6":
         manager.nhap_diem()
     elif lua_chon == "7":
         manager.xuat_bang_diem_csv()
     elif lua_chon == "8":
+        manager.module_ai_analyzer()
+    elif lua_chon == "9":
         print("👋 Tạm biệt!")
         break
     else:

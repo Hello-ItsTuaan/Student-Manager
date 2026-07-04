@@ -1,9 +1,14 @@
 import requests
 import json
 import shutil
+import os
 from colorama import Fore, Style, init
 init(autoreset=True)  # Tự động reset màu sau mỗi lần print, không cần reset thủ công
 
+def clear():
+    # Xóa màn hình terminal — "cls" cho Windows, "clear" cho Mac/Linux
+    os.system("cls" if os.name == "nt" else "clear")
+    
 width = shutil.get_terminal_size().columns
 def lay_webhook_url():
     try:
@@ -16,7 +21,8 @@ def lay_webhook_url():
         input()
         pass
     
-    if len(discord_webhook["discord_webhook_url"]) == 0:
+    if len(discord_webhook.get("discord_webhook_url", "")) == 0:
+        clear()
         print("Cannot find Discord Webhook url, did you put it in?".center(width))
         
         while True:
@@ -46,8 +52,9 @@ def lay_webhook_url():
     
 def gui_discord(message):
     webhook_data = lay_webhook_url()
+
     if webhook_data is None:
-        print(Fore.YELLOW + "WARNING: Because you didn't enter your Discord Webhook, we cannot send your message to Discord.")
+        print(Fore.LIGHTYELLOW_EX + "WARNING: Because you didn't enter your Discord Webhook, we cannot send your message to Discord.")
         return
 
 
@@ -58,5 +65,6 @@ def gui_discord(message):
 
     if response.status_code == 204:
         print(Fore.GREEN +"Message has been send successfully!".center(width))
+        input()
     else:
         print(Fore.RED + f"There is something ain't right! Please try again. Your error code is {response.status_code}")

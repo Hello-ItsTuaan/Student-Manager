@@ -1,4 +1,5 @@
 from prettytable import PrettyTable
+import os
 from colorama import Style, init, Fore
 import json
 
@@ -38,7 +39,9 @@ def edit_hs(manager):
             while True:
                 try:
                     print("[1] Tên [2] Lớp [3] SĐT Phụ huynh [4] Tên Giáo Viên [5] Thoát")
-                    sualuachon = int(input("Nhập lựa chọn bạn muốn chọn: "))
+                    sualuachon = input("Nhập lựa chọn bạn muốn chọn: ")
+                    
+                
                     
                     if sualuachon == "1":
 
@@ -55,7 +58,7 @@ def edit_hs(manager):
 
                         old_lop = hoc_sinh.lop
                         new_lop = input(f"Lớp cũ: {hoc_sinh.lop}, bạn muốn sửa thành gì?")
-                        new_lop = hoc_sinh.lop
+                        hoc_sinh.lop = new_lop
                         manager.luu_json()
 
                         print(Fore.GREEN + f"SUCCESSFULLY: Changed student's class from [{old_lop}] to [{new_lop}]!")
@@ -66,7 +69,7 @@ def edit_hs(manager):
                         #TODO: Continue implementing this features, otherwise add more information into your Prettytable table (Giao vien, SDT phu huynh,...)
                         old_sdt = hoc_sinh.sdt_cha_me
                         new_sdt = input(f"Lớp cũ: {hoc_sinh.sdt_cha_me}, bạn muốn sửa thành gì?")
-                        new_sdt = hoc_sinh.sdt_cha_me
+                        hoc_sinh.sdt_cha_me = new_sdt
                         manager.luu_json()
 
                         print(Fore.GREEN + f"SUCCESSFULLY: Changed student's parents phone number from [{old_sdt}] to [{new_sdt}]!")
@@ -76,7 +79,7 @@ def edit_hs(manager):
                     elif sualuachon == "4":
                         old_giaovien = hoc_sinh.giao_vien
                         new_giaovien = input(f"Lớp cũ: {hoc_sinh.giao_vien}, bạn muốn sửa thành gì?")
-                        new_giaovien = hoc_sinh.giao_vien
+                        hoc_sinh.giao_vien = new_giaovien
                         manager.luu_json()
 
                         print(Fore.GREEN + f"SUCCESSFULLY: Changed student's TEACHER NAME from [{old_giaovien}] to [{new_giaovien}]!")
@@ -94,8 +97,11 @@ def edit_hs(manager):
                         elif quitorno.lower() == "y":
                             clear()
                             break
-                except ValueError:
-                    print(Fore.YELLOW + "WARNING: The Operation cannot complete! Did you type something that isn't in the list? ")
+                except Exception as e:
+                    # Thay vì chỉ bắt mỗi ValueError, bắt Exception chung để tránh sập app nếu có lỗi phát sinh ngoài ý muốn
+                    print(Fore.LIGHTYELLOW_EX + f"WARNING: The Operation cannot complete! Error: {e}")
                     input()
                     clear()
                     continue
+    else:
+        print(Fore.LIGHTYELLOW_EX + "Please enter a valid student's ID!")
