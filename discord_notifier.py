@@ -68,3 +68,4 @@ def gui_discord(message):
         input()
     else:
         print(Fore.RED + f"There is something ain't right! Please try again. Your error code is {response.status_code}")
+        input

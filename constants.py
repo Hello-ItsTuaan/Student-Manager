@@ -1,8 +1,15 @@
 import shutil
 from colorama import Fore, Style, init
+import os
+
 
 init(autoreset=True)  # Tự động reset màu sau mỗi lần print, không cần reset thủ công
 width = shutil.get_terminal_size().columns
+
+
+def clear():
+    # Xóa màn hình terminal — "cls" cho Windows, "clear" cho Mac/Linux
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 def chon_mon():
@@ -58,33 +65,42 @@ def chon_mon():
         44: "Phát triển ứng dụng Web",
         45: "Kỹ năng Biên - Phiên dịch"
     }
-    try:
-        for so, ten in vietnamese_subjects.items():
-            print(f"  [{so}] {ten}")
+    while True:
+        try:
+            for so, ten in vietnamese_subjects.items():
+                print(f"  [{so}] {ten}")
 
-        lua_chon = input(f"Chọn môn học {Fore.GREEN}(VD: 1 3 5) {Fore.WHITE} or {Fore.GREEN} (VD: 1, 2, 3) : ")
-        tong_mon_hoc = lua_chon.replace(",", " ").split()
-        
-        ketqua = []
-        for mon_hoc in tong_mon_hoc:
-            mon_hoc = int(mon_hoc)
-            ketqua.append(vietnamese_subjects[mon_hoc])
+            lua_chon = input(f"Chọn môn học {Fore.GREEN}(VD: 1 3 5) {Fore.WHITE} or {Fore.GREEN} (VD: 1, 2, 3) : ")
+            tong_mon_hoc = lua_chon.replace(",", " ").split()
+            
+            ketqua = []
+            for mon_hoc in tong_mon_hoc:
+                mon_hoc = int(mon_hoc)
+                ketqua.append(vietnamese_subjects[mon_hoc])
+                        
+            for ten in ketqua:
+                print(Fore.WHITE + f"🟢 {ten}")
+
+            print(f"\nĐã chọn {len(ketqua)} môn học!")
+            input()
+            
+            xac_nhan = input(f"\nXác nhận? y/n\n>>>")
+
+            if xac_nhan.lower() == "y":
+                return ketqua
+            if xac_nhan.lower() == "n":
+                return None
+
                     
-        for ten in ketqua:
-            print(f"🟢 {ten}")
+                    
 
-        print(f"\nĐã chọn {len(ketqua)} môn học!")
-        input()
-        
-        xac_nhan = input(f"\nXác nhận? y/n")
-        if xac_nhan.lower() == "y":
-            return ketqua
-        if xac_nhan.lower() == "n":
-            return None
-
-    except ValueError:
-        print(Fore.RED + "ERROR: You can only input NUMBERS!")
-        return
-    except KeyError:
-        print(Fore.RED + "ERROR: Make sure you have entered numbers that are around 1-45")
-        return
+        except ValueError:
+            print(Fore.RED + "ERROR: You can only input NUMBERS!")
+            input()
+            clear()
+            continue
+        except KeyError:
+            print(Fore.RED + "ERROR: Make sure you have entered numbers that are around 1-45")
+            input()
+            clear()
+            continue

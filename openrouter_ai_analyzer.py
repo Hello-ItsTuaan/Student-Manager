@@ -59,46 +59,60 @@ def lay_api_key():
 def ai_analyzer():
     from openrouter import OpenRouter
     import os
-    print("Loading...")
-    with open("config.json", "r") as file:
-        data = json.load(file)
-    api_key = data.get("openrouter_api_key")
-    
-    #LAY danhsachhocsinh de import vao cho AI
-    with open("danh_sach_hoc_sinh.json", "r", encoding="utf-8") as file:
-        data_str = json.load(file)
+    try:
+        print("Loading...(Or press Ctrl + C to cancle the progress)")
+        
+        with open("config.json", "r") as file:
+            data = json.load(file)
+        api_key = data.get("openrouter_api_key")
+        
+        #LAY danhsachhocsinh de import vao cho AI
+        with open("danh_sach_hoc_sinh.json", "r", encoding="utf-8") as file:
+            data_str = json.load(file)
 
-    
-    with OpenRouter(api_key=api_key) as client:
-        response = client.chat.send(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "user", "content": f"""Bạn là trợ lý phân tích học tập. Dưới đây là dữ liệu học sinh (định dạng JSON):
-
+        
+        with OpenRouter(api_key=api_key) as client:
+            response = client.chat.send(
+                model="gpt-4o-mini",
+                messages=[
+                    {"role": "user", "content": f"""Bạn là trợ lý phân tích học tập. Dưới đây là dữ liệu học sinh CỦA TÔI:
 {data_str}
 
-Hãy phân tích và trình bày theo cấu trúc sau, VẼ BẢN PHÂN TÍCH (VISUAL ANALYTIC nhưng không bị lỗi format/thụt lề, phải KIỂM TRA LẠI, vì response của bạn sẽ được hiện thị trong Terminal thay vì trình duyệt hoặc markdown nên cần cẩn thận, k để bị lỗi thụt lề cho các ký tự ở cuối bản như "|") (chạy được trong terminal, có thể xài markdown và vẽ bản bằng _, |,...):
+Hãy thực hiện các việc sau, viết bằng tiếng Việt, giọng văn tự nhiên như giáo viên chủ nhiệm:
 
-1. TỔNG QUAN: GPA trung bình, số học sinh mỗi xếp loại
-2. HỌC SINH CẦN CHÚ Ý: liệt kê học sinh có GPA thấp hoặc môn yếu rõ rệt
-3. MÔN HỌC YẾU NHẤT: môn nào điểm trung bình thấp nhất trong toàn bộ danh sách
-4. GỢI Ý: 2-3 gợi ý cụ thể, ngắn gọn
+1. Tổng quan tình hình học tập (2-3 câu ngắn gọn).
+2. Bảng điểm chi tiết theo từng môn — trình bày dưới dạng bảng ASCII căn chỉnh thẳng hàng
+   bằng ký tự `-` và `|`, và PHẢI đặt toàn bộ bảng bên trong code block ba dấu backtick (```)
+   để Discord hiển thị đúng font monospace, không bị lệch cột.
+3. Nhận xét môn học cần cải thiện và môn học đang làm tốt.
+4. Đưa ra 2-3 lời khuyên cụ thể, ngắn gọn, có thể hành động ngay.
 
-Trả lời bằng tiếng Việt và cả Tiếng Anh, càng chi tiết càng tốt, sử dụng Markdown"""}
-            ],
-        )
-        
-        
-        
+Yêu cầu định dạng bắt buộc:
+- KHÔNG dùng cú pháp Markdown của Discord như **in đậm**, *in nghiêng*, # tiêu đề, gạch đầu dòng "-".
+- Chỉ dùng bảng ASCII (trong code block ```) và văn xuôi thường cho phần còn lại.
+- Toàn bộ nội dung trả về KHÔNG được vượt quá 1900 ký tự (để chừa khoảng trống an toàn dưới giới hạn 2000 ký tự của Discord webhook, tránh lỗi 400).
+- Nếu dữ liệu quá dài không thể tóm gọn trong 1900 ký tự, hãy ưu tiên rút gọn phần nhận xét,
+  giữ nguyên bảng điểm.
+- Không thêm lời chào, lời dẫn thừa (ví dụ "Dưới đây là phân tích của tôi:"). + xưng hộ là tôi với bạn, sử dụng emoji càng tốt!"""}
+                ]
+            )
+            
+            
+            
 
+            clear()
+            print(response.choices[0].message.content)
+            guiorno = str(input(Fore.LIGHTYELLOW_EX + "Do you want to send this response to your Discord through your Discord Webhook? yes/no: "))
+            if guiorno.lower() =="yes":
+                gui_discord(message=response.choices[0].message.content)
+            elif guiorno.lower() == "no":
+                time.sleep(1)
+                pass
+    except KeyboardInterrupt:
         clear()
-        print(response.choices[0].message.content)
-        guiorno = str(input(Fore.LIGHTBLUE_EX + "Do you want to send this response to your Discord through your Discord Webhook? yes/no: "))
-        if guiorno.lower() =="yes":
-            gui_discord(message=response.choices[0].message.content)
-        elif guiorno.lower() == "no":
-            time.sleep(1)
-            pass
+        print("Stand by...".center(width))
+        time.sleep(0.5)
+        pass
 
         
         

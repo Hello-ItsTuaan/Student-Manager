@@ -172,43 +172,54 @@ class Manager:
 
             id_can_tim = input("Nhập ID học sinh: ")
 
+            tim_thay = False
+            
             for hoc_sinh in self.danhsach:
                 if hoc_sinh.id == id_can_tim:
+                    tim_thay = True
 
                     ds_mon = chon_mon()
 
                     if ds_mon is None:
                         return
 
-                    try:
+                    while True:
                         for ten_mon in ds_mon:
                             while True:
-                                diem = float(input(f"Nhập điểm môn {ten_mon}: "))
+                                try:
+                                    diem = float(input(f"Nhập điểm môn {ten_mon}: "))
 
-                                if diem > 10:
-                                    print("Điểm không thể lớn hơn 10")
+                                    if diem > 10:
+                                        print("Điểm không thể lớn hơn 10")
 
-                                elif diem < 0:
-                                    print("Điểm không thể nhỏ hơn 0")
+                                    elif diem < 0:
+                                        print("Điểm không thể nhỏ hơn 0")
 
-                                else:
-                                    hoc_sinh.them_mon(ten_mon, diem)
-                                    break
 
+                                    else:
+                                        hoc_sinh.them_mon(ten_mon, diem)
+                                        break
+                                        
+
+                                except ValueError:
+                                    print("❌ Điểm phải là số! VD: 8.4")
+                                    input()
+                                        
                         self.luu_json()
                         print("✅ Đã cập nhật điểm!")
-
-                    except ValueError:
-                        print("❌ Điểm phải là số!")
-
+                        input()
+                        break
+                    
+                if tim_thay is True:
+                    break
+                else:
+                    print("❌ Không tìm thấy học sinh")
                     input()
-                    return
-
-            print("❌ Không tìm thấy học sinh")
-            input()
+                    
     def xuat_bang_diem_csv(self):
         xuat_csv(self.danhsach)
     def edit_hoc_sinh(self):
         edit_hs(self)
     def module_ai_analyzer(self):
+        lay_api_key()
         ai_analyzer()
