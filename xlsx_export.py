@@ -41,14 +41,14 @@ def xuat_file(danhsach, ten_file="bang_diem.xlxs"):
             row = gia_tri_row + 2
         
         diem_cua_hoc_sinh = {}
-        for mon in hoc_sinh.danhsach:
+        for mon in hoc_sinh.mon_hoc:
             diem_cua_hoc_sinh[mon["ten"]] = mon["diem"]
         
         fields = [hoc_sinh.id, hoc_sinh.name, hoc_sinh.lop, hoc_sinh.sdt_cha_me, hoc_sinh.xep_loai()]
         
         
         for vitri, thong_tin in enumerate(fields):
-            cell = ws.cell(row=row, column=vitri+6, value= thong_tin)
+            cell = ws.cell(row=row, column=vitri+1, value= thong_tin)
             if vitri == 1:
                 cell.fill = XANH_LA_NHAT
                 
@@ -56,6 +56,10 @@ def xuat_file(danhsach, ten_file="bang_diem.xlxs"):
         for vitri, ten_mon in enumerate(tat_ca_mon):
             column = vitri + 6
             diem = diem_cua_hoc_sinh.get(ten_mon)
-            cell = ws.cell(row = row, column=vitri+6, value=ten_mon)
+            cell = ws.cell(row = row, column=column , value=diem)
             if diem is not None:
                 cell.fill = mau_theo_diem(diem)
+                
+    wb.save(ten_file)
+    print(Fore.GREEN + f"✅ Đã xuất file {ten_file} thành công!")
+    input()

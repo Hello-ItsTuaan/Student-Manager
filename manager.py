@@ -2,7 +2,7 @@ from student import Student
 from discord_notifier import gui_discord
 from constants import chon_mon
 from openrouter_ai_analyzer import ai_analyzer, lay_api_key
-from csv_export import xuat_csv
+from xlsx_export import xuat_file
 from edit_hoc_sinh import edit_hs
 import json
 import os
@@ -217,7 +217,7 @@ class Manager:
                     input()
                     
     def xuat_bang_diem_csv(self):
-        xuat_csv(self.danhsach)
+        xuat_file(self.danhsach)
     def edit_hoc_sinh(self):
         edit_hs(self)
     def module_ai_analyzer(self):
